@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tasknewsapp.Adapters.Adapter
 import com.example.tasknewsapp.R
+import com.example.tasknewsapp.Utils.ChromeCustomTabs
 import com.example.tasknewsapp.ViewModels.MainViewmodel
 
 class MainActivity : AppCompatActivity() {
@@ -20,12 +21,15 @@ class MainActivity : AppCompatActivity() {
     lateinit var rv:RecyclerView
     lateinit var adapter:Adapter
     lateinit var progress:ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         rv=findViewById(R.id.homeRv)
         progress=findViewById(R.id.progress);
 
+
+setTitle("News App")
         rv.layoutManager=LinearLayoutManager(applicationContext)
         viewModel=ViewModelProvider(this).get(MainViewmodel::class.java)
         viewModel.getData()?.observe(this,Observer{
@@ -36,4 +40,5 @@ progress.isVisible=false
         })
 
     }
+
 }
