@@ -17,26 +17,26 @@ import com.example.tasknewsapp.Utils.ChromeCustomTabs
 import com.example.tasknewsapp.ViewModels.MainViewmodel
 
 class MainActivity : AppCompatActivity() {
-    lateinit var viewModel:MainViewmodel
-    lateinit var rv:RecyclerView
-    lateinit var adapter:Adapter
-    lateinit var progress:ProgressBar
+    lateinit var viewModel: MainViewmodel
+    lateinit var rv: RecyclerView
+    lateinit var adapter: Adapter
+    lateinit var progress: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        rv=findViewById(R.id.homeRv)
-        progress=findViewById(R.id.progress);
+        rv = findViewById(R.id.homeRv)
+        progress = findViewById(R.id.progress);
 
 
-setTitle("News App")
-        rv.layoutManager=LinearLayoutManager(applicationContext)
-        viewModel=ViewModelProvider(this).get(MainViewmodel::class.java)
-        viewModel.getData()?.observe(this,Observer{
-            Log.d("taggy", "get response${it}")
-            adapter= Adapter(it,applicationContext)
-            rv.adapter=adapter
-progress.isVisible=false
+        setTitle("News App")
+        rv.layoutManager = LinearLayoutManager(applicationContext)
+        viewModel = ViewModelProvider(this).get(MainViewmodel::class.java)
+        viewModel.getData()?.observe(this, Observer {
+//            Log.d("taggy", "get response${it}")
+            adapter = Adapter(it, applicationContext)
+            rv.adapter = adapter
+            progress.isVisible = false
         })
 
     }
