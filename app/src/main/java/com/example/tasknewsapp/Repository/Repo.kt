@@ -8,26 +8,28 @@ import com.example.tasknewsapp.Models.Data
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 object Repo {
-    val serviceData= MutableLiveData<Data>()
+    val serviceData = MutableLiveData<Data>()
 
-    fun getData():MutableLiveData<Data>{
-        Log.d("tag"," from repo call")
-    val call=Retrofit.apiInterface.getData()
-       call.enqueue(object : Callback<Data>{
-           override fun onResponse(call: Call<Data>, response: Response<Data>) {
-               val data = response.body()
+    fun getData(): MutableLiveData<Data> {
+        Log.d("tag", " from repo call")
+        val call = Retrofit.apiInterface.getData()
+        call.enqueue(object : Callback<Data> {
+            override fun onResponse(call: Call<Data>, response: Response<Data>) {
+                val data = response.body()
 
-               serviceData.value=data
+                serviceData.value = data
 //               Log.d("tagy", serviceData.toString())
-           }
+            }
 
-           override fun onFailure(call: Call<Data>, t: Throwable) {
+            override fun onFailure(call: Call<Data>, t: Throwable) {
+                serviceData.value = null
 
-           }
+            }
 
-       })
-return serviceData
+        })
+        return serviceData
     }
 }
 

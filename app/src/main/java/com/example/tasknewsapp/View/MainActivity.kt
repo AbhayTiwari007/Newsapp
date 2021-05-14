@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +35,10 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(MainViewmodel::class.java)
         viewModel.getData()?.observe(this, Observer {
 //            Log.d("taggy", "get response${it}")
+            if(it==null){
+                Toast.makeText(applicationContext,"Error",Toast.LENGTH_LONG)
+                return@Observer
+            }
             adapter = Adapter(it, applicationContext)
             rv.adapter = adapter
             progress.isVisible = false
